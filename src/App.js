@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import image from './Adobe Express - file.png'
+// 1. IMPORT THE BACKGROUND IMAGE:
+// Make sure 'wp13050630.webp' is in the same 'src' folder.
+import heroBgImage from './wp13050630.webp';
+
 
 // SVG Icons
 const MenuIcon = () => (
@@ -60,6 +64,23 @@ const App = () => {
   const pressRef = useRef();
   const contactRef = useRef();
 
+  // Set page title and favicon
+  useEffect(() => {
+    document.title = "Soubhagya Atiyat";
+    
+    const favicon = document.querySelector('link[rel="icon"]');
+    if (favicon) {
+      favicon.href = image;
+      favicon.type = 'image/png';
+    } else {
+      const newFavicon = document.createElement('link');
+      newFavicon.rel = 'icon';
+      newFavicon.type = 'image/png';
+      newFavicon.href = image;
+      document.head.appendChild(newFavicon);
+    }
+  }, []);
+
   // Add CSS styles to head
   useEffect(() => {
     const styleSheet = document.createElement('style');
@@ -82,7 +103,7 @@ const App = () => {
         --shadow-color: rgba(212, 175, 55, 0.15);
         --gradient-primary: linear-gradient(135deg, #FFF8DC 0%, #F5F5DC 50%, #DDBF94 100%);
         --gradient-accent: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
-        --overlay-color: rgba(255, 248, 220, 0.95);
+        --overlay-color: rgba(255, 248, 220, 0.85);
       }
 
       .dark-theme {
@@ -100,7 +121,7 @@ const App = () => {
         --shadow-color: rgba(255, 107, 53, 0.2);
         --gradient-primary: linear-gradient(135deg, #0F0A07 0%, #1A0F0A 50%, #2D1810 100%);
         --gradient-accent: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
-        --overlay-color: rgba(15, 10, 7, 0.95);
+        --overlay-color: rgba(15, 10, 7, 0.85);
       }
 
       /* Global Styles */
@@ -367,12 +388,25 @@ const App = () => {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--gradient-primary);
         position: relative;
         padding-top: 120px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: var(--background-color);
+        opacity: 0.7;
+        z-index: 0;
       }
 
       .hero-content {
+        position: relative;
+        z-index: 1;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
@@ -1159,12 +1193,11 @@ const App = () => {
       /* PDF & Print Styles */
       @media print {
         body {
-          font-family: 'Times New Roman', serif;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
         }
 
         * {
-          background: transparent !important;
-          color: #000 !important;
           box-shadow: none !important;
           text-shadow: none !important;
           transition: none !important;
@@ -1180,43 +1213,17 @@ const App = () => {
         .navbar {
           position: static !important;
           transform: none !important;
-          border-radius: 0;
           border: none;
-          border-bottom: 2px solid #ccc;
-          padding: 1rem;
           backdrop-filter: none;
-          width: 100%;
-          max-width: 100%;
         }
 
-        .nav-menu {
-            position: static !important;
-            transform: none !important;
-            flex-direction: row !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            background: none;
-            border: none;
-            padding: 0;
-            gap: 1rem;
-        }
-        
-        .nav-link::before, .nav-link::after {
-          display: none !important;
-        }
-
-        /* Layout & Page Break Control */
+        /* Control page flow */
         section {
-          padding: 2rem 0;
-          page-break-before: always;
-        }
-        .hero {
-          page-break-before: avoid;
-          min-height: auto;
-          padding-top: 1rem;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
         }
 
-        .award-item, .education-item, .performance-card, .gallery-item {
+        .award-item, .education-item, .performance-card, .testimonial-carousel {
           page-break-inside: avoid;
         }
         
@@ -1226,25 +1233,21 @@ const App = () => {
           transform: none !important;
         }
         
-        /* Show full URLs for external links */
-        a[href^="http"]::after {
-          content: " [" attr(href) "]";
-          font-size: 0.8em;
-          font-weight: normal;
-        }
-        .nav-link::after { /* Don't show URL for nav links */
-            content: "";
+        /* Force gradient text to render correctly */
+        .hero-text h1 {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            background: var(--gradient-accent) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
         }
 
         img {
           max-width: 100% !important;
           page-break-inside: avoid;
         }
-        .hero-image img {
-          max-width: 300px;
-        }
         
-        /* Adjust grids for single-column print layout */
         .hero-content, .about-content, .contact-content, .awards-grid {
             grid-template-columns: 1fr !important;
         }
@@ -1385,8 +1388,8 @@ const App = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section ref={heroRef} className="hero">
+      {/* 2. APPLY THE BACKGROUND IMAGE VIA INLINE STYLE */}
+      <section ref={heroRef} className="hero" style={{ backgroundImage: `url(${heroBgImage})` }}>
         <div className="hero-content">
           <div className="hero-text animate-on-scroll">
             <h1>Sree Soubhagya Gouri Atiyat</h1>
