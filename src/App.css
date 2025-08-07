@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+Pro:wght@300;400;600&display=swap');
+
+/* CSS Variables for Theming */
+.light-theme {
+  --primary-color: #8B4513;
+  --secondary-color: #2E7D32;
+  --accent-color: #DAA520;
+  --background-color: #F5E6D3;
+  --surface-color: #FFFFFF;
+  --text-primary: #2C2C2C;
+  --text-secondary: #5D4E75;
+  --text-muted: #8B7D6B;
+  --border-color: #E0D4C7;
+  --shadow-color: rgba(139, 69, 19, 0.1);
+  --gradient-primary: linear-gradient(135deg, #F5E6D3 0%, #E8D5C4 100%);
+  --gradient-accent: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dark-theme {
+  --primary-color: #DC143C;
+  --secondary-color: #4A148C;
+  --accent-color: #FFD700;
+  --background-color: #1A1A1A;
+  --surface-color: #2D2D2D;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0BEC5;
+  --text-muted: #78909C;
+  --border-color: #424242;
+  --shadow-color: rgba(220, 20, 60, 0.2);
+  --gradient-primary: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+  --gradient-accent: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+html {
+  scroll-behavior: smooth;
 }
 
-.App-link {
-  color: #61dafb;
+body {
+  font-family: 'Source Serif Pro', serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--background-color);
+  transition: all 0.3s ease;
+  overflow-x: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app {
+  transition: all 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
 }
