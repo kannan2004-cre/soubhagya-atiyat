@@ -1333,9 +1333,7 @@ const App = () => {
           <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
             <button className="nav-link" onClick={() => scrollToSection(heroRef)}>Home</button>
             <button className="nav-link" onClick={() => scrollToSection(aboutRef)}>About</button>
-            <button className="nav-link" onClick={() => scrollToSection(performancesRef)}>Performances</button>
-            <button className="nav-link" onClick={() => scrollToSection(galleryRef)}>Gallery</button>
-            <button className="nav-link" onClick={() => scrollToSection(pressRef)}>Recognition</button>
+            <button className="nav-link" onClick={() => scrollToSection(pressRef)}>Awards</button>
             <button className="nav-link" onClick={() => scrollToSection(contactRef)}>Contact</button>
           </div>
 
@@ -1418,73 +1416,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* Performances Section */}
-      <section ref={performancesRef} className="performances">
-        <div className="container">
-          <h2 className="section-title animate-on-scroll">Performances</h2>
-          
-          {/* Bharathanatyam Performances */}
-          <div className="performance-category animate-on-scroll">
-            <h3 className="category-title">Bharathanatyam</h3>
-            <div className="performances-grid">
-              {bharatanatyamPerformances.map((performance, index) => (
-                <div key={index} className="performance-card animate-on-scroll" style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className="performance-image">
-                    <img src={performance.image} alt={performance.title} />
-                  </div>
-                  <div className="performance-info">
-                    <h3>{performance.title}</h3>
-                    <p className="venue">{performance.venue}</p>
-                    <p className="date">{performance.date}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mohiniyattam Performances */}
-          <div className="performance-category animate-on-scroll">
-            <h3 className="category-title">Mohiniyattam</h3>
-            <div className="performances-grid">
-              {mohiniyattamPerformances.map((performance, index) => (
-                <div key={index} className="performance-card animate-on-scroll" style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className="performance-image">
-                    <img src={performance.image} alt={performance.title} />
-                  </div>
-                  <div className="performance-info">
-                    <h3>{performance.title}</h3>
-                    <p className="venue">{performance.venue}</p>
-                    <p className="date">{performance.date}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section ref={galleryRef} className="gallery">
-        <div className="container">
-          <h2 className="section-title animate-on-scroll">Gallery</h2>
-          <div className="gallery-grid">
-            {galleryImages.map((image, index) => (
-              <div
-                key={index}
-                className="gallery-item animate-on-scroll"
-                style={{animationDelay: `${index * 0.1}s`}}
-                onClick={() => setSelectedImage(image)}
-              >
-                <img src={image} alt={`Gallery ${index + 1}`} />
-                <div className="gallery-overlay">
-                  <span>View Full Size</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Press & Recognition Section */}
       <section ref={pressRef} className="press">
         <div className="container">
@@ -1507,28 +1438,8 @@ const App = () => {
             </div>
           </div>
 
-          <div className="testimonials animate-on-scroll">
-            <h3>Recognition</h3>
-            <div className="testimonial-carousel">
-              <div className="testimonial-content">
-                <blockquote>"{testimonials[currentTestimonial].text}"</blockquote>
-                <cite>
-                  — {testimonials[currentTestimonial].author}
-                  <span>{testimonials[currentTestimonial].role}</span>
-                </cite>
-              </div>
-              <div className="testimonial-indicators">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`indicator ${index === currentTestimonial ? 'active' : ''}`}
-                    onClick={() => setCurrentTestimonial(index)}
-                  ></button>
-                ))}
-              </div>
+         
             </div>
-          </div>
-        </div>
       </section>
 
       {/* Contact Section */}
