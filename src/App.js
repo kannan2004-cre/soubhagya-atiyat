@@ -52,6 +52,7 @@ const App = () => {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   
   const heroRef = useRef();
