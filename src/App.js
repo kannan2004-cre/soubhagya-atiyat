@@ -1442,7 +1442,7 @@ const App = () => {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2024 Sree Soubhagya Gouri Atiyat. All rights reserved.</p>
+          <p>&copy; 2025 Sree Soubhagya Gouri Atiyat. All rights reserved.</p>
           <p>Preserving the eternal essence of Indian classical dance.</p>
         </div>
       </footer>
