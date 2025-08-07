@@ -20,13 +20,6 @@ const ChevronDownIcon = () => (
   </svg>
 );
 
-const InstagramIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="2"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" strokeWidth="2"/>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" strokeWidth="2"/>
-  </svg>
-);
 
 const YoutubeIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,11 +41,6 @@ const PhoneIcon = () => (
   </svg>
 );
 
-const PlayIcon = () => (
-  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="5,3 19,12 5,21" fill="currentColor"/>
-  </svg>
-);
 
 const CloseModalIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +52,10 @@ const App = () => {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   
   const heroRef = useRef();
   const aboutRef = useRef();
-  const performancesRef = useRef();
-  const galleryRef = useRef();
   const pressRef = useRef();
   const contactRef = useRef();
 
@@ -1202,7 +1187,7 @@ const App = () => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  },);
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -1246,62 +1231,7 @@ const App = () => {
     }
   ];
 
-  const bharatanatyamPerformances = [
-    {
-      title: "All India Sai Samaj",
-      venue: "Mylapore, Chennai",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Chinnamelam Festival",
-      venue: "Thanjavur Heritage Arts and Cultural Academy, Palace Devasthanam",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Nrithyothsaaha South Zonal Competition",
-      venue: "Regional Cultural Centre",
-      date: "2023",
-      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Annual Dance Competition",
-      venue: "Omkara Nada Brahmam Trust, Chennai",
-      date: "2023",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
-    }
-  ];
-
-  const mohiniyattamPerformances = [
-    {
-      title: "Koothambalam Performance",
-      venue: "Kerala Kalamandalam Deemed to be University for Arts and Culture",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Navaratri Mahotsav",
-      venue: "Urakathamma Thiruvadi Temple",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Shivaratri Mahotsav",
-      venue: "Sree Vadakkumnathan Temple",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop"
-    }
-  ];
-
-  const galleryImages = [
-    "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop"
-  ];
+ 
 
   const testimonials = [
     {
@@ -1466,7 +1396,6 @@ const App = () => {
                 <a href="https://www.youtube.com/@GouriAtiyat" target="_blank" rel="noopener noreferrer" className="social-link">
                   <YoutubeIcon />
                 </a>
-                <a href="#" className="social-link"><InstagramIcon /></a>
               </div>
             </div>
 
