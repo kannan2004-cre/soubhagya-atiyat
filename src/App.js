@@ -1155,6 +1155,100 @@ const App = () => {
           padding: 1.5rem;
         }
       }
+
+      /* PDF & Print Styles */
+      @media print {
+        body {
+          font-family: 'Times New Roman', serif;
+        }
+
+        * {
+          background: transparent !important;
+          color: #000 !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+          transition: none !important;
+          animation: none !important;
+        }
+
+        /* Hide non-essential elements for the PDF */
+        .nav-controls, .mobile-menu-btn, .scroll-indicator, .submit-btn, .modal-overlay, .social-links, .footer .print-instruction {
+          display: none !important;
+        }
+
+        /* Make the navbar a static header */
+        .navbar {
+          position: static !important;
+          transform: none !important;
+          border-radius: 0;
+          border: none;
+          border-bottom: 2px solid #ccc;
+          padding: 1rem;
+          backdrop-filter: none;
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .nav-menu {
+            position: static !important;
+            transform: none !important;
+            flex-direction: row !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            background: none;
+            border: none;
+            padding: 0;
+            gap: 1rem;
+        }
+        
+        .nav-link::before, .nav-link::after {
+          display: none !important;
+        }
+
+        /* Layout & Page Break Control */
+        section {
+          padding: 2rem 0;
+          page-break-before: always;
+        }
+        .hero {
+          page-break-before: avoid;
+          min-height: auto;
+          padding-top: 1rem;
+        }
+
+        .award-item, .education-item, .performance-card, .gallery-item {
+          page-break-inside: avoid;
+        }
+        
+        /* Ensure all animated content is visible */
+        .animate-on-scroll, .animate-on-scroll.animate-in, .hero-text, .hero-image {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        /* Show full URLs for external links */
+        a[href^="http"]::after {
+          content: " [" attr(href) "]";
+          font-size: 0.8em;
+          font-weight: normal;
+        }
+        .nav-link::after { /* Don't show URL for nav links */
+            content: "";
+        }
+
+        img {
+          max-width: 100% !important;
+          page-break-inside: avoid;
+        }
+        .hero-image img {
+          max-width: 300px;
+        }
+        
+        /* Adjust grids for single-column print layout */
+        .hero-content, .about-content, .contact-content, .awards-grid {
+            grid-template-columns: 1fr !important;
+        }
+      }
     `;
     document.head.appendChild(styleSheet);
     
@@ -1442,8 +1536,11 @@ const App = () => {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2025 Sree Soubhagya Gouri Atiyat. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Sree Soubhagya Gouri Atiyat. All rights reserved.</p>
           <p>Preserving the eternal essence of Indian classical dance.</p>
+          <p className="print-instruction" style={{fontSize: '0.8rem', opacity: 0.7, marginTop: '1rem'}}>
+            To save this page as a PDF, use your browser's Print function (Ctrl/Cmd + P) and select "Save as PDF".
+          </p>
         </div>
       </footer>
 
