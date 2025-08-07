@@ -310,6 +310,16 @@ const App = () => {
         .navbar {
           top: 10px;
           padding: 0.5rem 1rem;
+          transform: none;
+          left: 10px;
+          right: 10px;
+          max-width: none;
+          border-radius: 15px;
+        }
+
+        .navbar:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 15px 40px var(--shadow-color);
         }
 
         .mobile-menu-btn {
@@ -328,7 +338,7 @@ const App = () => {
           width: 90vw;
           max-width: 300px;
           flex-direction: column;
-          justify-content: flex-start;
+          align-items: center;
           padding: 2rem 0;
           transition: all 0.3s ease;
           opacity: 0;
@@ -423,7 +433,6 @@ const App = () => {
         border-radius: 20px;
         box-shadow: 0 20px 50px var(--shadow-color);
         transition: transform 0.3s ease;
-        border: 4px solid var(--primary-color);
       }
 
       .hero-image img:hover {
@@ -1141,16 +1150,7 @@ const App = () => {
         .gallery-grid {
           grid-template-columns: 1fr;
         }
-
-        .navbar {
-          top: 10px;
-          left: 10px;
-          right: 10px;
-          transform: none;
-          max-width: none;
-          border-radius: 15px;
-        }
-
+        
         .contact-form {
           padding: 1.5rem;
         }
@@ -1232,7 +1232,7 @@ const App = () => {
     }
   ];
 
- 
+  
 
   const testimonials = [
     {
@@ -1369,7 +1369,7 @@ const App = () => {
             </div>
           </div>
 
-         
+          
             </div>
       </section>
 
