@@ -58,9 +58,10 @@ const App = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  
+
   const heroRef = useRef();
   const aboutRef = useRef();
+  const performancesRef = useRef();
   const pressRef = useRef();
   const contactRef = useRef();
 
@@ -68,15 +69,19 @@ const App = () => {
   useEffect(() => {
     document.title = "Soubhagya Atiyat";
     
+    // Create a stylish "SA" SVG logo for the favicon
+    const saLogoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect width="100" height="100" rx="20" fill="#D4AF37"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Playfair Display, serif" font-size="55" fill="white">SA</text></svg>`;
+    const faviconHref = `data:image/svg+xml;base64,${btoa(saLogoSvg)}`;
+
     const favicon = document.querySelector('link[rel="icon"]');
     if (favicon) {
-      favicon.href = image;
-      favicon.type = 'image/png';
+      favicon.href = faviconHref;
+      favicon.type = 'image/svg+xml';
     } else {
       const newFavicon = document.createElement('link');
       newFavicon.rel = 'icon';
-      newFavicon.type = 'image/png';
-      newFavicon.href = image;
+      newFavicon.type = 'image/svg+xml';
+      newFavicon.href = faviconHref;
       document.head.appendChild(newFavicon);
     }
   }, []);
@@ -496,6 +501,16 @@ const App = () => {
         .hero-text {
           text-align: center;
         }
+        
+        /* Mobile-specific hero text color for readability */
+        .hero-text h1 {
+          background: none;
+          -webkit-background-clip: unset;
+          background-clip: unset;
+          color: var(--text-primary);
+          -webkit-text-fill-color: initial;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
       }
 
       /* Section Styles */
@@ -617,12 +632,17 @@ const App = () => {
 
       .performances-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
       }
 
       .performance-category {
-        margin-bottom: 3rem;
+        background: var(--surface-color);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        border: 2px solid var(--border-color);
       }
 
       .category-title {
@@ -645,81 +665,36 @@ const App = () => {
         border-radius: 1px;
       }
 
-      .performance-card {
-        background: var(--surface-color);
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px var(--shadow-color);
-        transition: all 0.3s ease;
-        border: 2px solid var(--border-color);
+      .performance-list {
+        list-style: none;
+        padding: 0;
       }
 
-      .performance-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 50px var(--shadow-color);
-        border-color: var(--primary-color);
-      }
-
-      .performance-image {
-        position: relative;
-        overflow: hidden;
-        height: 200px;
-        background: var(--gradient-accent);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .performance-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-      }
-
-      .performance-card:hover .performance-image img {
-        transform: scale(1.1);
-      }
-
-      .video-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 50%;
-        padding: 1rem;
-        color: white;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .performance-card:hover .video-overlay {
-        opacity: 1;
-      }
-
-      .performance-info {
-        padding: 1.5rem;
-      }
-
-      .performance-info h3 {
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-        font-size: 1.3rem;
-      }
-
-      .venue {
+      .performance-item {
+        font-size: 1.1rem;
         color: var(--text-secondary);
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
-        font-weight: 500;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.3s ease;
       }
 
-      .date {
-        color: var(--accent-color);
-        font-size: 0.9rem;
-        font-weight: 600;
+      .performance-item:last-child {
+        border-bottom: none;
       }
+
+      .performance-item:hover {
+        background: var(--card-color);
+        border-left: 4px solid var(--primary-color);
+        transform: translateX(5px);
+      }
+
+      @media (max-width: 768px) {
+        .performances-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
 
       /* Gallery Section */
       .gallery {
@@ -1184,7 +1159,7 @@ const App = () => {
         .gallery-grid {
           grid-template-columns: 1fr;
         }
-        
+
         .contact-form {
           padding: 1.5rem;
         }
@@ -1226,13 +1201,13 @@ const App = () => {
         .award-item, .education-item, .performance-card, .testimonial-carousel {
           page-break-inside: avoid;
         }
-        
+
         /* Ensure all animated content is visible */
         .animate-on-scroll, .animate-on-scroll.animate-in, .hero-text, .hero-image {
           opacity: 1 !important;
           transform: none !important;
         }
-        
+
         /* Force gradient text to render correctly */
         .hero-text h1 {
             -webkit-print-color-adjust: exact;
@@ -1247,14 +1222,14 @@ const App = () => {
           max-width: 100% !important;
           page-break-inside: avoid;
         }
-        
+
         .hero-content, .about-content, .contact-content, .awards-grid {
             grid-template-columns: 1fr !important;
         }
       }
     `;
     document.head.appendChild(styleSheet);
-    
+
     return () => {
       document.head.removeChild(styleSheet);
     };
@@ -1329,7 +1304,20 @@ const App = () => {
     }
   ];
 
-  
+  const bharathanatyamPerformances = [
+    "All India Sai Samaj, Mylapore, Chennai",
+    "Chinnamelam Festival by Thanjavur Heritage Arts and Cultural Academy, Palace Devasthanam",
+    "Nrithyothsaaha South Zonal Competition",
+    "Annual Dance Competition by Omkara Nada Brahmam Trust Chennai"
+  ];
+
+  const mohiniyattamPerformances = [
+    "Koothambalam, Kerala Kalamandalam Deemed to be University for Arts and Culture",
+    "Navaratri Mahotsav at Urakathamma Thiruvadi Temple",
+    "Shivaratri Mahotsav at Sree Vadakkumnathan Temple"
+  ];
+
+
 
   const testimonials = [
     {
@@ -1357,10 +1345,11 @@ const App = () => {
           <div className="nav-logo">
             <h2>Sree Soubhagya</h2>
           </div>
-          
+
           <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
             <button className="nav-link" onClick={() => scrollToSection(heroRef)}>Home</button>
             <button className="nav-link" onClick={() => scrollToSection(aboutRef)}>About</button>
+            <button className="nav-link" onClick={() => scrollToSection(performancesRef)}>Performances</button>
             <button className="nav-link" onClick={() => scrollToSection(pressRef)}>Awards</button>
             <button className="nav-link" onClick={() => scrollToSection(contactRef)}>Contact</button>
           </div>
@@ -1377,7 +1366,7 @@ const App = () => {
                 <span className="theme-slider"></span>
               </label>
             </div>
-            
+
             <button
               className="mobile-menu-btn"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -1444,11 +1433,36 @@ const App = () => {
         </div>
       </section>
 
+      {/* Performances Section */}
+      <section ref={performancesRef} className="performances">
+        <div className="container">
+          <h2 className="section-title animate-on-scroll">Selected Performances</h2>
+          <div className="performances-grid">
+            <div className="performance-category animate-on-scroll">
+              <h3 className="category-title">Bharathanatyam</h3>
+              <ul className="performance-list">
+                {bharathanatyamPerformances.map((performance, index) => (
+                  <li key={index} className="performance-item">{performance}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="performance-category animate-on-scroll">
+              <h3 className="category-title">Mohiniyattam</h3>
+              <ul className="performance-list">
+                {mohiniyattamPerformances.map((performance, index) => (
+                  <li key={index} className="performance-item">{performance}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Press & Recognition Section */}
       <section ref={pressRef} className="press">
         <div className="container">
           <h2 className="section-title animate-on-scroll">Awards & Recognition</h2>
-          
+
           <div className="awards-section animate-on-scroll">
             <div className="awards-grid">
               <div className="award-item">
@@ -1466,7 +1480,7 @@ const App = () => {
             </div>
           </div>
 
-          
+
             </div>
       </section>
 
@@ -1478,7 +1492,7 @@ const App = () => {
             <div className="contact-info animate-on-scroll">
               <h3>Let's Connect</h3>
               <p>Available for performances, workshops, and collaborations.</p>
-              
+
               <div className="contact-methods">
                 <div className="contact-method">
                   <EmailIcon />
