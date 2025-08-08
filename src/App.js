@@ -426,13 +426,10 @@ const App = () => {
       }
 
       .hero-text h1 {
-        background: var(--gradient-accent);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--text-primary);
         margin-bottom: 1rem;
         animation: fadeInUp 1s ease-out;
-        text-shadow: 2px 2px 4px var(--shadow-color);
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
       }
 
       .hero-subtitle {
@@ -500,16 +497,6 @@ const App = () => {
 
         .hero-text {
           text-align: center;
-        }
-        
-        /* Mobile-specific hero text color for readability */
-        .hero-text h1 {
-          background: none;
-          -webkit-background-clip: unset;
-          background-clip: unset;
-          color: var(--text-primary);
-          -webkit-text-fill-color: initial;
-          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
       }
 
@@ -991,7 +978,7 @@ const App = () => {
         box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
       }
 
-      .submit-btn {
+      .submit-btn, .download-pdf-btn {
         background: var(--gradient-accent);
         color: white;
         border: none;
@@ -1006,9 +993,13 @@ const App = () => {
         letter-spacing: 1px;
       }
 
-      .submit-btn:hover {
+      .submit-btn:hover, .download-pdf-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 25px var(--shadow-color);
+      }
+      
+      .download-pdf-btn {
+        margin-top: 1.5rem;
       }
 
       @media (max-width: 768px) {
@@ -1179,8 +1170,12 @@ const App = () => {
           animation: none !important;
         }
 
+        .no-print {
+            display: none !important;
+        }
+
         /* Hide non-essential elements for the PDF */
-        .nav-controls, .mobile-menu-btn, .scroll-indicator, .submit-btn, .modal-overlay, .social-links, .footer .print-instruction {
+        .nav-controls, .mobile-menu-btn, .scroll-indicator, .modal-overlay, .social-links, .footer .print-instruction, .contact-form {
           display: none !important;
         }
 
@@ -1201,28 +1196,23 @@ const App = () => {
         .award-item, .education-item, .performance-card, .testimonial-carousel {
           page-break-inside: avoid;
         }
-
+        
         /* Ensure all animated content is visible */
         .animate-on-scroll, .animate-on-scroll.animate-in, .hero-text, .hero-image {
           opacity: 1 !important;
           transform: none !important;
         }
-
+        
         /* Force gradient text to render correctly */
         .hero-text h1 {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-            background: var(--gradient-accent) !important;
-            -webkit-background-clip: text !important;
-            background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
+            color: var(--text-primary) !important;
         }
 
         img {
           max-width: 100% !important;
           page-break-inside: avoid;
         }
-
+        
         .hero-content, .about-content, .contact-content, .awards-grid {
             grid-template-columns: 1fr !important;
         }
@@ -1492,7 +1482,7 @@ const App = () => {
             <div className="contact-info animate-on-scroll">
               <h3>Let's Connect</h3>
               <p>Available for performances, workshops, and collaborations.</p>
-
+              
               <div className="contact-methods">
                 <div className="contact-method">
                   <EmailIcon />
@@ -1503,6 +1493,10 @@ const App = () => {
                   <span>+91 62386 93253</span>
                 </div>
               </div>
+
+              <button className="download-pdf-btn no-print" onClick={() => window.print()}>
+                Download as PDF
+              </button>
 
               <div className="social-links">
                 <a href="https://www.youtube.com/@GouriAtiyat" target="_blank" rel="noopener noreferrer" className="social-link">
